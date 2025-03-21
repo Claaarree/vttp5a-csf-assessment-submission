@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CartStore } from '../cart.store';
 import { lastValueFrom, Observable } from 'rxjs';
-import { MenuItems, Order, OrderDetails, OrderItems } from '../models';
+import { Response, MenuItems, Order, OrderDetails, OrderItems } from '../models';
 import { Router } from '@angular/router';
 import { RestaurantService } from '../restaurant.service';
 
@@ -67,6 +67,17 @@ export class PlaceOrderComponent implements OnInit{
       items: orderItems
     }
     console.log(finalOrder);
+    this.restaurantSvc.sendOrder(finalOrder).then(
+      payload => {
+        this.router.navigate(['/receipt']);
+        // if(payload.message){
+        //   console.log(payload)
+        //   alert(payload);
+        // } else {
+        // }
+      }
+    )
+    // .catch<Error>(err => );
   }
 
 }

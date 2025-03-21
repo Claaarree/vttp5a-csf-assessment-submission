@@ -17,6 +17,7 @@ import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -46,7 +47,7 @@ public class RestaurantService {
   
   private RestTemplate restTemplate = new RestTemplate();
 
-  public final String baseUrl = "https://payment-service-production-a75a.up.railway.app/";
+  public final String baseUrl = "https://payment-service-production-a75a.up.railway.app/api/payment";
 
   // TODO: Task 2.2
   // You may change the method's signature
@@ -99,6 +100,7 @@ public class RestaurantService {
 
     HttpHeaders headers = new HttpHeaders();
     headers.add("X-AUTHENTICATE", username);
+    headers.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
     JsonObject toSend = Json.createObjectBuilder()
       .add("order_id", orderId)
       .add("payer", username)
@@ -107,7 +109,8 @@ public class RestaurantService {
       .build();
 
     RequestEntity<String> req = RequestEntity.post(baseUrl, headers)
-        .body(toSend.toString());
+        .contentType(MediaType.APPLICATION_JSON)
+        .body(toSend.toString(), String.class);
 
     ResponseEntity<String> res = restTemplate.exchange(req, String.class);
 

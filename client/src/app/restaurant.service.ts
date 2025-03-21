@@ -1,11 +1,13 @@
 import { HttpClient } from "@angular/common/http";
 import { inject } from "@angular/core";
 import { lastValueFrom } from "rxjs";
-import { MenuItems, OrderDetails } from "./models";
+import { MenuItems, OrderDetails, Response } from "./models";
 
 export class RestaurantService {
 
   private httpClient = inject(HttpClient);
+  response!: Response;
+  error!: Error;
 
   // TODO: Task 2.2
   // You change the method's signature but not the name
@@ -15,6 +17,8 @@ export class RestaurantService {
 
   // TODO: Task 3.2
   sendOrder(finalOrder: OrderDetails) {
-    this.httpClient.post<string>('/api/food-order', finalOrder)
+    return lastValueFrom(this.httpClient.post<Response>('/api/food_order', finalOrder)).then(
+      payload => this.response = payload
+    ).catch<Error>( err => this.error = err);
   }
 }

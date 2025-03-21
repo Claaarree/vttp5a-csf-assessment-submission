@@ -24,3 +24,14 @@ export interface OrderItems {
     price: number
     quantity: number
 }
+
+export interface Response {
+    orderId: string
+    paymentId: string
+    total: number
+    timestamp: number
+}
+
+export interface Error {
+    message: string
+}

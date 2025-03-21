@@ -52,12 +52,15 @@ public class RestaurantController {
       try {
         JsonObject receipt = restaurantService.makePayment(payload);
         // restaurantService.saveToMongo(payload);
-
+        return ResponseEntity.status(200).body(receipt.toString());
       } catch (Exception e) {
-        // TODO: handle exception
+        e.printStackTrace();
+        JsonObject failure = Json.createObjectBuilder()
+            .add("message", e.getMessage())
+            .build();
+        
+        return ResponseEntity.status(500).body(failure.toString());
       }
     }
-
-    return ResponseEntity.ok("{}");
   }
 }
