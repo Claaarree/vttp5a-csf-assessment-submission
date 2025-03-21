@@ -1,1 +1,3 @@
 # TODO: Task 1.1
+
+mongoimport --uri="mongodb://mongo:vFgMDaIlEVuFOSxDRHGencvcqOkDvTQA@interchange.proxy.rlwy.net:38799/?authSource=admin" -d restaurant -c menus --type=json --jsonArray --file=menus.json
