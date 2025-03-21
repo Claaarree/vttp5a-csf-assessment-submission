@@ -110,6 +110,7 @@ public class RestaurantService {
 
     RequestEntity<String> req = RequestEntity.post(baseUrl, headers)
         .contentType(MediaType.APPLICATION_JSON)
+        .accept(MediaType.APPLICATION_JSON)
         .body(toSend.toString(), String.class);
 
     ResponseEntity<String> res = restTemplate.exchange(req, String.class);
