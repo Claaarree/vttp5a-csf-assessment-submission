@@ -4,4 +4,23 @@ export interface MenuItems {
     name: string
     description: string
     price: number
+    quantity: number
+}
+
+export interface Order {
+    items: MenuItems[]
+    totalPrice: number
+    totalQuantity: number
+}
+
+export interface OrderDetails {
+    items: OrderItems[]
+    username: string
+    password: string
+}
+
+export interface OrderItems {
+    id: string
+    price: number
+    quantity: number
 }

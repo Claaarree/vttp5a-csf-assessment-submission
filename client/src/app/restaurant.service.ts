@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { inject } from "@angular/core";
 import { lastValueFrom } from "rxjs";
-import { MenuItems } from "./models";
+import { MenuItems, OrderDetails } from "./models";
 
 export class RestaurantService {
 
@@ -14,4 +14,7 @@ export class RestaurantService {
   }
 
   // TODO: Task 3.2
+  sendOrder(finalOrder: OrderDetails) {
+    this.httpClient.post<string>('/api/food-order', finalOrder)
+  }
 }

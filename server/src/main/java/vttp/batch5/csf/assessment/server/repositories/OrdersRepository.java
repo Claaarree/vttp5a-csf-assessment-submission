@@ -11,6 +11,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import static vttp.batch5.csf.assessment.server.MongoConstants.C_MENUS;
+import static vttp.batch5.csf.assessment.server.MongoConstants.C_ORDERS;
 import static vttp.batch5.csf.assessment.server.MongoConstants.F_NAME;
 
 @Repository
@@ -40,5 +41,14 @@ public class OrdersRepository {
   // Write the native MongoDB query for your access methods in the comment below
   //
   //  Native MongoDB query here
+  /*db.orders.insert({
+    _id: <value>,
+    order_id: <value>,
+    ...
+  })*/
+
+  public void saveOrderDetails(Document d) {
+    template.insert(d, C_ORDERS);
+  }
   
 }
